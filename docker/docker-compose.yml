@@ -1,0 +1,27 @@
+cakephp:
+    container_name: oo-cakephp
+    build: ./cakephp/
+    ports:
+        - 8805:80
+    volumes_from:
+        - oo
+    links:
+        - mysql
+oo:
+    image: php:7.1-apache
+    container_name: oo
+    volumes:
+        - ../:/var/www/html
+    command: "true"
+mysql:
+    container_name: oo-mysql
+    image: mysql:latest
+    ports:
+        - 3305:3306
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: "oo"
+        MYSQL_USER: "oo"
+        MYSQL_PASSWORD: "oo"
+    volumes:
+        - ../:/docker        
